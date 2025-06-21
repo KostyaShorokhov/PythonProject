@@ -1,4 +1,8 @@
 ## Для настройки проекта нам понадобятся: 
+# PyCharm CE
+Качаем последнюю версию под свою ОС PyCharm Community Edition
+https://www.jetbrains.com/pycharm/download/other.html#version20243
+
 
 # python 3.13
 Настройка
@@ -20,3 +24,5 @@
 Проверить можно набрав в командной строке pip --version
 Pip, менеджер пакетов Python, обычно устанавливается вместе с Python, но если его нет, выполните команду в PowerShell: python -m ensurepip --upgrade.
 
+# установка библиотек
+Устанавливаем через менеджер пакетов pip в консоли IDE: `pip install pytest`, `pip install requests`
