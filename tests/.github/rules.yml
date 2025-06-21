@@ -1,0 +1,27 @@
+version: "1"
+rules:
+  # Запрет мёржа без одобрения
+  - id: require-one-approval
+    description: "Merge requires at least one approval."
+    type: merge
+    conditions:
+      - "!approved_by"
+    actions:
+      - prevent_merge
+
+  # Запрет мёржа без squash-коммита
+  - id: require-squash-commit
+    description: "Merge must be a squashed commit."
+    type: merge
+    conditions:
+      - "!squashed_commit"
+    actions:
+      - prevent_merge
+
+  # Запрет мёржа веток с внешними ссылками в имени
+  - id: disallow-url-in-branch-name
+    description: "Branch name cannot contain URLs."
+    type: branch_name
+    pattern: "(https?|ftp):\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)"
+    actions:
+      - prevent_push
