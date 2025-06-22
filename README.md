@@ -26,3 +26,10 @@ Pip, менеджер пакетов Python, обычно устанавлива
 
 # установка библиотек
 Устанавливаем через менеджер пакетов pip в консоли IDE: `pip install pytest`, `pip install requests`
+Устанавливаем Allure (для Windows) в консоли: `iwr -useb get.scoop.sh | iex` -> `scoop install allure`
+
+
+
+## запуск тестов 
+pytest -> старт всех тестов
+allure serve ./ui_tests/reports -> формирование отчета аллюр из указанно папки

@@ -1,4 +1,10 @@
-USER_NAME_INPUT = "user-name"
-USER_PASSWORD_INPUT = "password"
-LOGIN_BUTTON = "login-button"
-CATALOG = "[data-test='title']"
+from enum import Enum
+
+from selenium.webdriver.common.by import By
+
+
+class Locators(Enum):
+    USER_NAME_INPUT = (By.ID, "user-name")
+    USER_PASSWORD_INPUT = (By.ID, "password")
+    LOGIN_BUTTON = (By.ID, "login-button")
+    CATALOG = (By.CSS_SELECTOR, "[data-test='title']")
