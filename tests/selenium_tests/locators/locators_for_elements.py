@@ -8,3 +8,4 @@ class Locators(Enum):
     USER_PASSWORD_INPUT = (By.ID, "password")
     LOGIN_BUTTON = (By.ID, "login-button")
     CATALOG = (By.CSS_SELECTOR, "[data-test='title']")
+    ERROR = (By.CSS_SELECTOR, "[data-test='error']")

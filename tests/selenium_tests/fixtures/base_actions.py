@@ -1,11 +1,9 @@
 import allure
 import pytest
-import requests
 from selenium import webdriver
 from selenium.common import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.support.ui import WebDriverWait
 
 @pytest.fixture
 def chrome():
@@ -29,6 +27,9 @@ class BasePage:
     def get_current_page_title(self):
         return self.driver.title
 
+    def get_current_url(self):
+        return self.driver.current_url
+
     def find_element(self, locator, timeout=10):
         with allure.step(f"Находим элемент по локатору {locator}"): return WebDriverWait(self.driver, timeout).until(
             EC.presence_of_element_located(locator))
@@ -36,6 +37,12 @@ class BasePage:
     def click_element(self, locator):
         strategy, value = locator.value
         with allure.step(f"Кликаем по элементу"): self.driver.find_element(strategy, value).click()
+
+    def get_text_element(self, locator):
+        strategy, value = locator.value
+        with allure.step(f"Получаем значение текста элемента {locator}"):
+            element = self.driver.find_element(strategy, value)
+            return element.text
 
     def input_text(self, locator, text):
         strategy, value = locator.value
@@ -45,8 +52,9 @@ class BasePage:
 
     def is_visible(self, locator, timeout=10):
         try:
-            with allure.step(f"Проверяем видимость элемента по локатору {locator}"): WebDriverWait(self.driver, timeout).until(
-                EC.visibility_of_element_located(locator))
+            with allure.step(f"Проверяем видимость элемента по локатору {locator}"):
+                WebDriverWait(self.driver, timeout).until(
+                    EC.visibility_of_element_located(locator))
             return True
         except TimeoutException:
             return False
@@ -55,13 +63,3 @@ class BasePage:
         strategy, value = locator.value
         element = self.driver.find_element(strategy, value)
         with allure.step(f"Проверяем отображение элемента"): return element.is_displayed()
-
-
-@pytest.fixture(scope='session')
-def session():
-    """Настроенная сессия для всех тестов"""
-    sess = requests.request().Session()
-    sess.headers.update({
-        'Content-Type': 'application/json'
-    })
-    return sess
