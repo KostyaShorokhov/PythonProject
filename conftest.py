@@ -1,9 +1,5 @@
 import logging
-import string
-from random import random
-
 import pytest
-
 
 def setup_logger():
     # Базовая настройка уровня логирования
