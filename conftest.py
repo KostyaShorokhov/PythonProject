@@ -1,7 +1,5 @@
 import logging
 import pytest
-import requests
-
 
 def setup_logger():
     # Базовая настройка уровня логирования
