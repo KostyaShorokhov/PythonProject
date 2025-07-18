@@ -1,8 +1,6 @@
 import logging
-import string
-from random import random
-
 import pytest
+import requests
 
 
 def setup_logger():
