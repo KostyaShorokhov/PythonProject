@@ -72,4 +72,7 @@ Fedora / CentOS. Используя стандартный менеджер па
 
 ## запуск тестов
 pytest -> старт всех тестов
-allure serve ./ui_tests/reports -> формирование отчета аллюр из указанно папки
+`allure serve .\selenium_tests\results\\allure_reports` -> формирование отчета аллюр из указанно папки
+
+## переход в директорию тестов -> запуск selenium тестов -> формирование отчета
+`cd tests\\selenium_tests ; pytest .\\test_example.py --alluredir ..\\results\\allure_reports ; cd .. ; allure serve results\\allure_reports`
