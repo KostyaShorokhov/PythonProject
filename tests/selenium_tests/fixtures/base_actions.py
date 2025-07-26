@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 @pytest.fixture
 def chrome():
+    """базовые настройки для chrome браузера"""
     options = webdriver.ChromeOptions()
     options.add_argument('--headless=new')
     options.add_argument('--window-size=1920,1080')
