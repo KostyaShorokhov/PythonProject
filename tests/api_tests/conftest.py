@@ -7,7 +7,7 @@ class BaseEndpoint:
     BASE_URL = 'https://restful-booker.herokuapp.com/'
 
 class Booking(BaseEndpoint):
-    """Класс для хранения путей, связанных с бронированием"""
+    """Класс для хранения endpoint'ов"""
     BOOKING_PATH = '/booking'
 
     @classmethod
@@ -38,22 +38,3 @@ def base_session():
     session = requests.Session()
     session.cookies.set("token", token)
     return session
-
-@pytest.fixture(scope='function')
-def booking_fixture(base_session):
-    booking_data = {
-        "firstname": "Jim",
-        "lastname": "Beam",
-        "totalprice": 111,
-        "depositpaid": True,
-        "bookingdates": {
-            "checkin": "2018-01-01",
-            "checkout": "2019-01-01"
-        },
-        "additionalneeds": "Breakfast"
-    }
-    response = base_session.post(Booking.create_booking(), json=booking_data)
-    assert response.status_code == 200
-    booking_id = response.json().get('bookingid')
-    yield booking_id
-    base_session.delete(Booking.delete_booking(booking_id))
